@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>1-2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #container {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            margin: 50px auto;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+
+        #content {
+            width: 520px;
+            position:relative;
+        }
+
+        #content li {
+            width: 120px;
+            height: 120px;
+            background: black;
+            color: white;
+            float: left;
+            margin-right: 5px;
+            text-align: center;
+            line-height: 120px;
+            font-size: 32px;
+        }
+
+        #arrow span {
+            width: 100px;
+            height: 40px;
+            background: gray;
+            text-align: center;
+            line-height: 40px;
+            float: left;
+            margin-right: 5px;
+        }
+
+        #arrow {
+            margin: 140px auto;
+            width: 210px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <ul id="content">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div id="arrow">
+        <span id="left">&lt;&lt;向左</span>
+        <span id="right">向右&gt;&gt;</span>
+    </div>
+</div>
+<script>
+    var oContianer = document.getElementById('container');
+    var oContent = document.getElementById('content');
+    var oLBtn = document.getElementById('left');
+    var oRBtn = document.getElementById('right');
+
+    oContent.innerHTML = oContent.innerHTML + oContent.innerHTML;
+    var aLi = oContent.getElementsByTagName('li');
+    oContent.style.width = aLi.length * (aLi[0].offsetWidth + 5) + 'px';
+    var speed = -1;
+    setInterval(function () {
+        //offsetLeft 只能取值  不能赋值
+        if (oContent.offsetLeft <= -oContent.offsetWidth / 2) {
+            oContent.style.left = 0;
+        }
+        if (oContent.offsetLeft > 0) {
+            oContent.style.left = -oContent.offsetWidth / 2 + 'px';
+        }
+        //XX.style.属性  只能取到内联样式的值 ，我们只用它来赋值
+        oContent.style.left = oContent.offsetLeft + speed + 'px';
+    },10)
+    oLBtn.onmouseover = function(){
+        speed = -1;
+    };
+    oRBtn.onmouseover = function(){
+        speed = 1;
+    };
+</script>
+</body>
+</html>
